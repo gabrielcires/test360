@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test 360</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Be+Vietnam:300,400,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <nav class="menu">
+        <div class="logo">LOGO</div>
+        <ul class="menu-list">
+            <li>INICIO</li>
+            <li>SERVICIOS</li>
+            <li>GALERÍA</li>
+            <li>CONTACTO</li>
+        </ul>
+    </nav>
+
+    <div class="mrg-top"></div>
+    <div class="lorem">
+        <h1>Lorem ipsum</h1>
+        <p class="fake-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel, consectetur. Nobis vitae
+            sint asperiores, doloribus dolor neque natus cum vero fugiat soluta! Quia quaerat sed dolore odit vero autem
+            iusto.</p>
+    </div>
+
+    <div class="vid-cont"><div class="vid360" id="player"></div></div>
+
+    <script src="three.js"></script>
+    <script src="panolens.js"></script>
+    <script src="main.js"></script>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        let player;
+        let panStarted = false;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                videoId: 'FAtdv94yzp4',
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // Start animation when video starts playing.
+        function onPlayerStateChange(event) {
+            if (event.data == 1 && !panStarted) {
+                requestAnimationFrame(panVideo);
+                panStarted = true;
+            }
+        }
+
+        function panVideo() {
+            // 20 seconds per rotation.
+            const yaw = (performance.now() / 1000 / 20 * 360) % 360;
+            // 2 up-down cycle per rotation.
+            const pitch = 20 * Math.sin(2 * yaw / 360 * 2 * Math.PI);
+            player.setSphericalProperties({
+                yaw: yaw,
+                pitch: pitch
+            });
+            requestAnimationFrame(panVideo);
+        }
+    </script>
+</body>
+
+</html>
