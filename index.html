@@ -47,6 +47,7 @@
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 videoId: 'FAtdv94yzp4',
+                playerVars: { 'autoplay': 1, 'controls': 0 },
                 events: {
                     'onStateChange': onPlayerStateChange
                 }
@@ -61,17 +62,17 @@
             }
         }
 
-        function panVideo() {
-            // 20 seconds per rotation.
-            const yaw = (performance.now() / 1000 / 20 * 360) % 360;
-            // 2 up-down cycle per rotation.
-            const pitch = 20 * Math.sin(2 * yaw / 360 * 2 * Math.PI);
-            player.setSphericalProperties({
-                yaw: yaw,
-                pitch: pitch
-            });
-            requestAnimationFrame(panVideo);
-        }
+        // function panVideo() {
+        //     // 20 seconds per rotation.
+        //     const yaw = (performance.now() / 1000 / 20 * 360) % 360;
+        //     // 2 up-down cycle per rotation.
+        //     const pitch = 20 * Math.sin(2 * yaw / 360 * 2 * Math.PI);
+        //     player.setSphericalProperties({
+        //         yaw: yaw,
+        //         pitch: pitch
+        //     });
+        //     requestAnimationFrame(panVideo);
+        // }
     </script>
 </body>
 
