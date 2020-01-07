@@ -8,6 +8,7 @@
     <title>Test 360</title>
 
     <link href="https://fonts.googleapis.com/css?family=Be+Vietnam:300,400,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -23,7 +24,38 @@
             <li>CONTACTO</li>
         </ul>
     </nav>
-    <div id="pano1" style="height: 60vh;"></div>
+
+
+
+    <div class="swiper-container swiper-no-swiping">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+                <div id="pano1" style="height: 60vh;"></div>
+            </div>
+            <div class="swiper-slide">
+                <div id="pano2" style="height: 60vh;"></div>
+            </div>
+            <div class="swiper-slide">
+                <div id="pano3" style="height: 60vh;"></div>
+            </div>
+            <div class="swiper-slide">
+                <div id="pano4" style="height: 60vh;"></div>
+            </div>
+            ...
+        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <!-- <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div> -->
+
+        <!-- If we need scrollbar -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+
     <div class="lorem">
         <h1>Lorem ipsum</h1>
         <p class="fake-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel, consectetur. Nobis vitae
@@ -31,10 +63,9 @@
             iusto.</p>
     </div>
 
-    
-
     <!-- <div class="vid-cont"><div class="vid360" id="player"></div></div> -->
 
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
     <script src="three.js"></script>
     <script src="panolens.js"></script>
     <script src="main.js"></script>
@@ -48,7 +79,10 @@
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 videoId: 'FAtdv94yzp4',
-                playerVars: { 'autoplay': 1, 'controls': 0 },
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0
+                },
                 events: {
                     'onStateChange': onPlayerStateChange
                 }
@@ -62,18 +96,33 @@
                 panStarted = true;
             }
         }
+        var mySwiper = new Swiper('.swiper-container', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: false,
+            effect: "fade",
+            speed: 500,
 
-        // function panVideo() {
-        //     // 20 seconds per rotation.
-        //     const yaw = (performance.now() / 1000 / 20 * 360) % 360;
-        //     // 2 up-down cycle per rotation.
-        //     const pitch = 20 * Math.sin(2 * yaw / 360 * 2 * Math.PI);
-        //     player.setSphericalProperties({
-        //         yaw: yaw,
-        //         pitch: pitch
-        //     });
-        //     requestAnimationFrame(panVideo);
-        // }
+            autoplay: {
+                delay: 5000,
+            },
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            // scrollbar: {
+            //     el: '.swiper-scrollbar',
+            // },
+        })
     </script>
 </body>
 
