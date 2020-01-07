@@ -1,6 +1,7 @@
 
 const panorama = new PANOLENS.ImagePanorama('test.jpg');
 const viewer = new PANOLENS.Viewer({
+    container: pano1,
     controlBar: false,
     horizontalView: false,
     cameraFov: 80,
